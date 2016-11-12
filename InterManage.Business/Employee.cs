@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace InterManage.Business
@@ -26,6 +27,25 @@ namespace InterManage.Business
 
     public partial class Employee
     {
+        public void Update(Employee employeeAppended)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                employeeAppended.Id = Id;
+                db.Employees.AddOrUpdate(employeeAppended);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                db.Employees.Remove(this);
+                db.SaveChanges();
+            }
+        }
+
         public static void Create(string firstName, string lastName)
         {
             using (var db = new ApplicationDbContext())
@@ -40,7 +60,7 @@ namespace InterManage.Business
             }
         }
 
-        public static List<Employee> GetEmployeeLsit()
+        public static List<Employee> GetEmployeeList()
         {
             using (var db = new ApplicationDbContext())
             {

@@ -14,47 +14,73 @@ namespace InterManage
     {
         private CollectionViewSource _employeeViewSource;
 
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private Employee GetSelectedEmployee() => (Employee)_employeeViewSource.View.CurrentItem;
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _employeeViewSource = (CollectionViewSource) FindResource("employeeViewSource");
-            _employeeViewSource.Source = Employee.GetEmployeeLsit();
-            // Load data by setting the CollectionViewSource.Source property:
-            // _employeeViewSource.Source = [generic data source]
+            RefreshEmployeeDataGrid();
         }
 
+        #region Employee list Data Grid
+
+        private void RefreshEmployeeDataGrid()
+        {
+            _employeeViewSource = (CollectionViewSource)FindResource("employeeViewSource");
+            _employeeViewSource.Source = Employee.GetEmployeeList();
+        }
+
+        #endregion
+
         #region Employee Info Flyout
+
+        private void OpenEmployeeInfoFlyout() => fo_EmployeeInfo.IsOpen = true;
+        private void CloseEmployeeInfoFlyout() => fo_EmployeeInfo.IsOpen = false;
+
 
         private void dg_EmployeeList_CurrentCellChanged(object sender, EventArgs e)
         {
             // False then true animates it closeing then opening again
-            fo_EmployeeInfo.IsOpen = false;
-            fo_EmployeeInfo.IsOpen = true;
-
+            CloseEmployeeInfoFlyout();
+            OpenEmployeeInfoFlyout();
             RefreshEmployeeInfoFlyout();
         }
 
         private void btn_InfoSave_Click(object sender, RoutedEventArgs e)
         {
+            var selectedEmployee = GetSelectedEmployee();
 
+            var updatedEmployee = new Employee()
+            {
+                Id = selectedEmployee.Id,
+                FirstName = tb_InfoFirstName.Text,
+                LastName = tb_InfoLastName.Text
+            };
+
+            selectedEmployee.Update(updatedEmployee);
+            RefreshEmployeeDataGrid();
+            CloseEmployeeInfoFlyout();
         }
 
         private void btn_InfoCancel_Click(object sender, RoutedEventArgs e)
         {
             RefreshEmployeeInfoFlyout();
+            fo_EmployeeInfo.IsOpen = false;
         }
 
         private void RefreshEmployeeInfoFlyout()
         {
-            var selectedEmployee = (Employee) _employeeViewSource.View.CurrentItem;
+            var selectedEmployee = GetSelectedEmployee();
             tb_InfoFirstName.Text = selectedEmployee.FirstName;
             tb_InfoLastName.Text = selectedEmployee.LastName;
         }
 
         #endregion
+        
     }
 }

@@ -9,7 +9,7 @@ namespace InterManage.BusinessTests
         [TestMethod()]
         public void GetEmployeeLsitTest()
         {
-            var e = Employee.GetEmployeeLsit();
+            var e = Employee.GetEmployeeList();
             Assert.IsNotNull(e);
         }
     }
