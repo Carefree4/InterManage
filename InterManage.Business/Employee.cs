@@ -41,6 +41,7 @@ namespace InterManage.Business
         {
             using (var db = new ApplicationDbContext())
             {
+                db.Employees.Attach(this);
                 db.Employees.Remove(this);
                 db.SaveChanges();
             }

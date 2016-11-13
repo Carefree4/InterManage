@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using InterManage.Business;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace InterManage
 {
@@ -31,7 +31,7 @@ namespace InterManage
 
         private void RefreshEmployeeDataGrid()
         {
-            _employeeViewSource = (CollectionViewSource)FindResource("employeeViewSource");
+            _employeeViewSource = (CollectionViewSource)FindResource("EmployeeViewSource");
             _employeeViewSource.Source = Employee.GetEmployeeList();
         }
 
@@ -80,7 +80,24 @@ namespace InterManage
             tb_InfoLastName.Text = selectedEmployee.LastName;
         }
 
+        private async void btn_DeleteEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var employee = GetSelectedEmployee();
+            var name = await this.ShowInputAsync("Are you sure you want to delete " + employee.FirstName + " " + employee.LastName + "?", "Type their first name to confirm");
+
+            if (name.Equals(employee.FirstName))
+            {
+                employee.Delete();
+                await this.ShowMessageAsync("Delete successfull", employee.FirstName + " " + employee.LastName + " has been deleted.");
+            }
+            else
+            {
+                await this.ShowMessageAsync("Delete unsuccessfull", employee.FirstName + " " + employee.LastName + " has not been deleted.");
+            }
+
+            RefreshEmployeeDataGrid();
+        }
+         
         #endregion
-        
     }
 }
