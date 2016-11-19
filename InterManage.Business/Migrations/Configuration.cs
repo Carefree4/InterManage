@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace InterManage.Business.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -18,7 +21,7 @@ namespace InterManage.Business.Migrations
                 db.Employees.AddOrUpdate(new Employee()
                 {
                     FirstName = "Terrance",
-                    LastName = "Towles"
+                    LastName = "Towles",
                 });
 
                 db.Employees.AddOrUpdate(new Employee()

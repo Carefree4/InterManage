@@ -27,10 +27,14 @@ namespace InterManage.Business
 
     public partial class Employee
     {
+
+        public List<Shift> GetShifts() => Shifts;
+
         public void Update(Employee employeeAppended)
         {
             using (var db = new ApplicationDbContext())
             {
+                // So the ID doesnt change
                 employeeAppended.Id = Id;
                 db.Employees.AddOrUpdate(employeeAppended);
                 db.SaveChanges();
