@@ -10,7 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml">
         </ResourceDictionary>
         <!-- Accent and AppTheme setting -->
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/cobalt.xaml">
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/yellow.xaml">
         </ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/basedark.xaml">
           <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:InterManage.ViewModel" />

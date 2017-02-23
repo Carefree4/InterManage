@@ -37,6 +37,7 @@ namespace InterManage.Model
             }
         }
 
+        // TODO: IDataErrorInfo implamentaion
         #region IDataErrorInfo Members
 
         public string this[string columnName]
@@ -46,10 +47,10 @@ namespace InterManage.Model
                 switch (columnName)
                 {
                     case "First Name":
-                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannor be null or empty. " : null;
+                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannot be null or empty. " : null;
                         break;
                     case "Last Name":
-                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannor be null or empty. " : null;
+                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannot be null or empty. " : null;
                         break;
                 }
 

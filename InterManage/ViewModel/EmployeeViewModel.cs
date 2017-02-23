@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InterManage.Model;
@@ -14,15 +15,10 @@ namespace InterManage.ViewModel
     {
         public EmployeeViewModel()
         {
-            SelectedEmployee = null;
-            AddEmployeeCommand = new RelayCommand(AddEmployee, () => SelectedEmployee == null);
-            RemoveEmployeeCommand = new RelayCommand(RemoveSelectedEmployee, () => SelectedEmployee != null);
+            AddEmployeeCommand = new RelayCommand(AddEmployee, () => FocusedEmployee != null);
+            RemoveEmployeeCommand = new RelayCommand(RemoveSelectedEmployee, () => FocusedEmployee != null);
 
-            if (SelectedEmployee != null)
-            {
-                SelectedEmployee.PropertyChanged += SelectedEmployeeChanged;
-            }
-
+            FocusedEmployee = new Employee();
             LoadEmployees();
         }
         
@@ -37,107 +33,64 @@ namespace InterManage.ViewModel
                 RaisePropertyChanged(nameof(Employees));
             }
         }
-
         
-        private Employee _selectedEmployee;
-        public Employee SelectedEmployee
+        
+        private Employee _focusedEmployee;
+        public Employee FocusedEmployee
         {
-            get { return _selectedEmployee; }
+            get { return _focusedEmployee; }
             set
             {
-                _selectedEmployee = value;
-                RaisePropertyChanged(nameof(SelectedEmployee));
-            }
-        }
+                _focusedEmployee = value;
+                RaisePropertyChanged(nameof(FocusedEmployee));
 
-        private void SelectedEmployeeChanged(object sender, PropertyChangedEventArgs e)
-        {
-            FirstName = SelectedEmployee.FirstName;
-            LastName = SelectedEmployee.LastName;
-        }
-
-        private string _firstName;
-        public string FirstName {
-            get { return _firstName;  }
-            set
-            {
-                _firstName = value;
-                RaisePropertyChanged(nameof(FirstName));
-            }
-        }
-
-        private string _lastName;
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                _lastName = value;
-                RaisePropertyChanged(nameof(LastName));
+                // Hack?
+                AddEmployeeCommand.RaiseCanExecuteChanged();
+                RemoveEmployeeCommand.RaiseCanExecuteChanged();
             }
         }
 
         public RelayCommand AddEmployeeCommand { get; private set; }
         public RelayCommand RemoveEmployeeCommand { get; private set; }
-
-        // Don't know why I need this, but it seems it wont work if I dont have it...
+        
         public void ContentCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Remove:
-                    foreach (Employee item in e.OldItems)
-                    {
-                        RemoveEmployee(item);
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Add:
-                    foreach (Employee item in e.NewItems)
-                    {
-                        // AddEmployee(item);
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            LoadEmployees();
         }
 
         private void AddEmployee()
         {
             using (var unitOfWork = new UnitOfWork(new InterManageDbContext()))
             {
-                var e = new Employee()
+                if (FocusedEmployee.Error == null)
                 {
-                    FirstName = this.FirstName,
-                    LastName = this.LastName
-                };
-
-                if (e.Error == null)
-                {
-                    unitOfWork.Employees.Add(e);
+                    var e = unitOfWork.Employees.Get(FocusedEmployee.Id);
+                    if (e == null)
+                    {
+                        unitOfWork.Employees.Add(FocusedEmployee);
+                    }
+                    else
+                    {
+                        e.FirstName = FocusedEmployee.FirstName;
+                        e.LastName = FocusedEmployee.LastName;
+                    }
                     unitOfWork.Commit();
                 }
             }
-            FirstName = string.Empty;
-            LastName = string.Empty;
             LoadEmployees();
+            FocusedEmployee = new Employee();
         }
 
-        public void RemoveSelectedEmployee() => RemoveEmployee(SelectedEmployee);
+        public void RemoveSelectedEmployee() => RemoveEmployee(FocusedEmployee);
 
         public void RemoveEmployee(Employee employee)
         {
             using (var unitOfWork = new UnitOfWork(new InterManageDbContext()))
             {
-                unitOfWork.Employees.Remove(SelectedEmployee);
+                unitOfWork.Employees.Remove(FocusedEmployee);
                 unitOfWork.Commit();
             }
+            LoadEmployees();
         }
 
         public void LoadEmployees()

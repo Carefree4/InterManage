@@ -35,17 +35,18 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="First Name" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock Text="Last Name" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="First Name" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="Last Name" Grid.Row="2" Grid.Column="0"/>
             <!--<TextBox Text="{Binding FirstName, BindingGroupName=Group1, UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="0"/>-->
             <!--<TextBox Text="{Binding LastName, BindingGroupName=Group1, UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="1"/>-->
-            <TextBox Text="{Binding FirstName, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
-            <TextBox Text="{Binding LastName, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="{Binding FocusedEmployee.Error}" Grid.Row="0" Grid.Column="0" />
+            <TextBox Text="{Binding FocusedEmployee.FirstName, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
+            <TextBox Text="{Binding FocusedEmployee.LastName, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"/>
             <Button Grid.Column="0" Grid.Row="9" Foreground="White" Background="DarkRed" Content="Delete" Command="{Binding RemoveEmployeeCommand}" Margin="4,0"/>
             <Button Grid.Column="1" Grid.Row="9" Foreground="White" Background="Green" Content="Save" Command="{Binding AddEmployeeCommand}" Margin="4,0"/>
             
         </Grid>
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="1" ItemsSource="{Binding Employees}" SelectedItem="{Binding FocusedEmployee, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
