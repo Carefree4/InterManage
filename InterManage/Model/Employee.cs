@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using InterManage.Annotations;
 
 namespace InterManage.Model
 {
     public class Employee : ModelBase, IDataErrorInfo
     {
-        public Guid Id { get; private set; }
-
         private string firstName;
         private string lastName;
 
@@ -16,6 +13,8 @@ namespace InterManage.Model
         {
             Id = Guid.NewGuid();
         }
+
+        public Guid Id { get; private set; }
 
         public string FirstName
         {
@@ -37,7 +36,12 @@ namespace InterManage.Model
             }
         }
 
-        // TODO: IDataErrorInfo implamentaion
+        public virtual ICollection<Shift> Shifts { get; set; }
+
+        public string FullName => FirstName + " " + LastName;
+
+        public override string ToString() => FullName;
+
         #region IDataErrorInfo Members
 
         public string this[string columnName]
@@ -46,11 +50,15 @@ namespace InterManage.Model
             {
                 switch (columnName)
                 {
-                    case "First Name":
-                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannot be null or empty. " : null;
+                    case nameof(FirstName):
+                        Error += string.IsNullOrWhiteSpace(FirstName)
+                            ? "First name cannot be null or empty. "
+                            : string.Empty;
                         break;
-                    case "Last Name":
-                        Error += string.IsNullOrWhiteSpace(FirstName) ? "Name cannot be null or empty. " : null;
+                    case nameof(lastName):
+                        Error += string.IsNullOrWhiteSpace(FirstName)
+                            ? "Last name cannot be null or empty. "
+                            : string.Empty;
                         break;
                 }
 

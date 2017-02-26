@@ -5,6 +5,6 @@ namespace InterManage.Repository.Core
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
-        Employee Get(Guid id);
+        Employee Get(Guid Id);
     }
 }

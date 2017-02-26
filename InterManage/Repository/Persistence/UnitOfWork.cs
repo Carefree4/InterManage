@@ -5,6 +5,7 @@ namespace InterManage.Repository.Persistence
     internal class UnitOfWork : IUnitOfWork
     {
         public IEmployeeRepository Employees { get; }
+        public IShiftRepository Shifts { get; }
 
         private readonly InterManageDbContext context;
         
@@ -12,6 +13,7 @@ namespace InterManage.Repository.Persistence
         {
             this.context = context;
             Employees = new EmployeeRepository(context);
+            Shifts = new ShiftRepository(context);
         }
 
         public int Commit()

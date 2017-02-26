@@ -10,11 +10,10 @@ namespace InterManage.Repository.Persistence
     {
         protected readonly DbContext Context;
 
-        public Repository(DbContext context)
+        protected Repository(DbContext context)
         {
             Context = context;
         }
-
         public IEnumerable<TEntity> GetAll() => Context.Set<TEntity>().ToList();
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

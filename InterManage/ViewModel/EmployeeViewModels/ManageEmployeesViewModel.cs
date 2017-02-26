@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using InterManage.Model;
 using InterManage.Repository.Persistence;
 
-namespace InterManage.ViewModel
+namespace InterManage.ViewModel.Employee
 {
-    internal class EmployeeViewModel : ViewModelBase
+    internal class ManageEmployeesViewModel : ViewModelBase
     {
-        public EmployeeViewModel()
+        private ObservableCollection<Model.Employee> _employees;
+
+
+        private Model.Employee _focusedEmployee;
+
+        public ManageEmployeesViewModel()
         {
             AddEmployeeCommand = new RelayCommand(AddEmployee, () => FocusedEmployee != null);
             RemoveEmployeeCommand = new RelayCommand(RemoveSelectedEmployee, () => FocusedEmployee != null);
 
-            FocusedEmployee = new Employee();
+            FocusedEmployee = new Model.Employee();
             LoadEmployees();
         }
-        
-        private ObservableCollection<Employee> _employees;
 
-        public ObservableCollection<Employee> Employees
+        public ObservableCollection<Model.Employee> Employees
         {
             get { return _employees; }
             private set
@@ -33,10 +32,8 @@ namespace InterManage.ViewModel
                 RaisePropertyChanged(nameof(Employees));
             }
         }
-        
-        
-        private Employee _focusedEmployee;
-        public Employee FocusedEmployee
+
+        public Model.Employee FocusedEmployee
         {
             get { return _focusedEmployee; }
             set
@@ -50,9 +47,9 @@ namespace InterManage.ViewModel
             }
         }
 
-        public RelayCommand AddEmployeeCommand { get; private set; }
-        public RelayCommand RemoveEmployeeCommand { get; private set; }
-        
+        public RelayCommand AddEmployeeCommand { get; }
+        public RelayCommand RemoveEmployeeCommand { get; }
+
         public void ContentCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             LoadEmployees();
@@ -78,30 +75,31 @@ namespace InterManage.ViewModel
                 }
             }
             LoadEmployees();
-            FocusedEmployee = new Employee();
+            FocusedEmployee = new Model.Employee();
         }
 
         public void RemoveSelectedEmployee() => RemoveEmployee(FocusedEmployee);
 
-        public void RemoveEmployee(Employee employee)
+        public void RemoveEmployee(Model.Employee employee)
         {
             using (var unitOfWork = new UnitOfWork(new InterManageDbContext()))
             {
                 unitOfWork.Employees.Remove(FocusedEmployee);
                 unitOfWork.Commit();
             }
+            FocusedEmployee = new Model.Employee();
             LoadEmployees();
         }
 
         public void LoadEmployees()
         {
-            IEnumerable<Employee> employees;
+            IEnumerable<Model.Employee> employees;
             using (var unitOfWork = new UnitOfWork(new InterManageDbContext()))
             {
                 employees = unitOfWork.Employees.GetAll();
             }
 
-            Employees = new ObservableCollection<Employee>(employees);
+            Employees = new ObservableCollection<Model.Employee>(employees);
         }
     }
 }

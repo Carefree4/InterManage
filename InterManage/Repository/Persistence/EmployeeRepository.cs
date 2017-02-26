@@ -11,6 +11,7 @@ namespace InterManage.Repository.Persistence
         public EmployeeRepository(DbContext context) : base(context)
         {
         }
+
         public Employee Get(Guid id) => Context.Set<Employee>().Find(id);
     }
 }

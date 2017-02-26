@@ -9,7 +9,7 @@
         Title="InterManage" Height="600" Width="800">
     <TabControl>
         <TabItem Header="Employees">
-            <employee:EmployeeDataGrid />
+            <employee:EmployeeTabControl />
         </TabItem>
     </TabControl>
 </controls:MetroWindow>

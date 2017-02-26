@@ -226,19 +226,29 @@
     <Compile Include="Migrations\InterManageDbContextModelSnapshot.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\Shift.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Repository\Core\IEmployeeRepository.cs" />
     <Compile Include="Repository\Core\IRepository.cs" />
+    <Compile Include="Repository\Core\IShiftRepository.cs" />
     <Compile Include="Repository\Core\IUnitOfWork.cs" />
     <Compile Include="Repository\Persistence\EmployeeRepository.cs" />
     <Compile Include="Repository\Persistence\InterManageDbContext.cs" />
     <Compile Include="Repository\Persistence\Repository.cs" />
+    <Compile Include="Repository\Persistence\ShiftRepository.cs" />
     <Compile Include="Repository\Persistence\UnitOfWork.cs" />
-    <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModels\EmployeeSchedulesViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModels\ManageEmployeesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Employee\EmployeeDataGrid.xaml.cs">
       <DependentUpon>EmployeeDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Employee\EmployeeSchedules.xaml.cs">
+      <DependentUpon>EmployeeSchedules.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Employee\EmployeeTabControl.xaml.cs">
+      <DependentUpon>EmployeeTabControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -276,6 +286,14 @@
     <Page Include="View\Employee\EmployeeDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Employee\EmployeeSchedules.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Employee\EmployeeTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
