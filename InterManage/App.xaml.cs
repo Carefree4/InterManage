@@ -16,6 +16,7 @@ namespace InterManage
             using (var db = new InterManageDbContext())
             {
                 db.Database.Migrate();
+                db.Database.EnsureCreated();
             }
         }
     }

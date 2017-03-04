@@ -12,6 +12,7 @@ namespace InterManage.Model
         public Employee()
         {
             Id = Guid.NewGuid();
+            Shifts = new List<Shift>();
         }
 
         public Guid Id { get; private set; }

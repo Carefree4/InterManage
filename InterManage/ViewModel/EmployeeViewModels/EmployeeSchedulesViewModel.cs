@@ -62,7 +62,7 @@ namespace InterManage.ViewModel.EmployeeViewModels
                     var shift = db.Shifts.Get(FocusedShift.Id);
                     if (shift == null)
                     {
-                        db.Shifts.Add(FocusedShift);
+                        db.Employees.Get(FocusedShift.AssignedEmployee.Id).Shifts.Add(FocusedShift);
                     }
                     else
                     {

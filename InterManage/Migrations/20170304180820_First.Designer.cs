@@ -8,9 +8,10 @@ using InterManage.Repository.Persistence;
 namespace InterManage.Migrations
 {
     [DbContext(typeof(InterManageDbContext))]
-    partial class InterManageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170304180820_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");

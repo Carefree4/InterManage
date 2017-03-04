@@ -16,6 +16,8 @@ namespace InterManage.Model
 
         public Guid Id { get; private set; }
 
+        // public Guid AssignedEmployeeRefId { get; set; }
+
         public virtual Employee AssignedEmployee
         {
             get { return _assignedEmployee; }
