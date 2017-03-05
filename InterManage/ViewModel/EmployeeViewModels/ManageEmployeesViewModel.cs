@@ -5,23 +5,16 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InterManage.Repository.Persistence;
 
-namespace InterManage.ViewModel.Employee
+namespace InterManage.ViewModel.EmployeeViewModels
 {
     internal class ManageEmployeesViewModel : ViewModelBase
     {
         private ObservableCollection<Model.Employee> _employees;
 
+        public RelayCommand AddEmployeeCommand { get; }
+        public RelayCommand RemoveEmployeeCommand { get; }
 
         private Model.Employee _focusedEmployee;
-
-        public ManageEmployeesViewModel()
-        {
-            AddEmployeeCommand = new RelayCommand(AddEmployee, () => FocusedEmployee != null);
-            RemoveEmployeeCommand = new RelayCommand(RemoveSelectedEmployee, () => FocusedEmployee != null);
-
-            FocusedEmployee = new Model.Employee();
-            LoadEmployees();
-        }
 
         public ObservableCollection<Model.Employee> Employees
         {
@@ -47,11 +40,17 @@ namespace InterManage.ViewModel.Employee
             }
         }
 
-        public RelayCommand AddEmployeeCommand { get; }
-        public RelayCommand RemoveEmployeeCommand { get; }
-
         public void ContentCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            LoadEmployees();
+        }
+
+        public ManageEmployeesViewModel()
+        {
+            AddEmployeeCommand = new RelayCommand(AddEmployee, () => FocusedEmployee != null);
+            RemoveEmployeeCommand = new RelayCommand(RemoveSelectedEmployee, () => FocusedEmployee != null);
+
+            FocusedEmployee = new Model.Employee();
             LoadEmployees();
         }
 

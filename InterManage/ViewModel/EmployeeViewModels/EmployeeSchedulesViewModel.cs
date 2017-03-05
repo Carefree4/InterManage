@@ -12,8 +12,7 @@ namespace InterManage.ViewModel.EmployeeViewModels
 {
     public class EmployeeSchedulesViewModel : ViewModelBase
     {
-        private Shift _focusedShift;
-
+        /*private Shift _focusedShift;
         private DateTime _selectedDate;
 
         public EmployeeSchedulesViewModel()
@@ -26,7 +25,6 @@ namespace InterManage.ViewModel.EmployeeViewModels
                 Employees = unit.Employees.GetAll().ToList();
             }
         }
-
 
         public DateTime SelectedDate
         {
@@ -76,6 +74,27 @@ namespace InterManage.ViewModel.EmployeeViewModels
         }
 
         public RelayCommand RemoveShiftCommand { get; set; }
-        public RelayCommand SaveShiftCommand { get; set; }
+        public RelayCommand SaveShiftCommand { get; set; }*/
+
+        public EmployeeSchedulesViewModel()
+        {
+            
+        }
+
+        private Shift _focusedShift;
+        public Shift FocusedShift
+        {
+            get { return _focusedShift; }
+            set
+            {
+                _focusedShift = value;
+                RaisePropertyChanged(nameof(FocusedShift));
+            }
+        }
+
+
+
+
+
     }
 }
