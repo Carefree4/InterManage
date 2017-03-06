@@ -8,8 +8,8 @@ using InterManage.Repository.Persistence;
 namespace InterManage.Migrations
 {
     [DbContext(typeof(InterManageDbContext))]
-    [Migration("20170304180820_First")]
-    partial class First
+    [Migration("20170305194850_DoAwayWithDateAndTime")]
+    partial class DoAwayWithDateAndTime
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,17 +41,9 @@ namespace InterManage.Migrations
 
                     b.Property<DateTime>("End");
 
-                    b.Property<DateTime>("EndDay");
-
-                    b.Property<TimeSpan>("EndTime");
-
                     b.Property<string>("Error");
 
                     b.Property<DateTime>("Start");
-
-                    b.Property<DateTime>("StartDay");
-
-                    b.Property<TimeSpan>("StartTime");
 
                     b.HasKey("Id");
 

@@ -209,9 +209,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Migrations\20170304180820_First.cs" />
-    <Compile Include="Migrations\20170304180820_First.designer.cs">
-      <DependentUpon>20170304180820_First.cs</DependentUpon>
+    <Compile Include="Migrations\20170305194850_DoAwayWithDateAndTime.cs" />
+    <Compile Include="Migrations\20170305194850_DoAwayWithDateAndTime.designer.cs">
+      <DependentUpon>20170305194850_DoAwayWithDateAndTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\InterManageDbContextModelSnapshot.cs" />
     <Compile Include="Model\Employee.cs" />

@@ -28,19 +28,6 @@ namespace InterManage.Model
             }
         }
 
-        // TODO: Test this
-        public TimeSpan StartTime
-        {
-            get { return Start.TimeOfDay; }
-            set { Start = Start.Date + value; }
-        }
-
-        public DateTime StartDay
-        {
-            get { return Start.Date; }
-            set { Start = value + Start.TimeOfDay; }
-        }
-
         public DateTime Start
         {
             get { return _start; }
@@ -49,18 +36,6 @@ namespace InterManage.Model
                 _start = value;
                 OnPropertyChanged(nameof(Start));
             }
-        }
-
-        public TimeSpan EndTime
-        {
-            get { return End.TimeOfDay; }
-            set { End = End.Date + value; }
-        }
-
-        public DateTime EndDay
-        {
-            get { return End.Date; }
-            set { End = value + End.TimeOfDay; }
         }
 
         public DateTime End

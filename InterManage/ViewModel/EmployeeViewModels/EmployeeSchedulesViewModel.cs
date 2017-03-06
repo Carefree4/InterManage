@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -12,6 +10,121 @@ namespace InterManage.ViewModel.EmployeeViewModels
 {
     public class EmployeeSchedulesViewModel : ViewModelBase
     {
+        private Shift _focusedShift;
+
+        private DateTime selectedDate;
+
+        public EmployeeSchedulesViewModel()
+        {
+            FocusedShift = DefaultShift();
+
+            RequeryEmployees = new RelayCommand(() => RaisePropertyChanged(nameof(Employees)), () => Employees != null);
+            SaveShiftCommand = new RelayCommand(() =>
+            {
+                SaveShift();
+                RaisePropertyChanged(nameof(ShiftsOnSelectedDate));
+            }, () => FocusedShift != null);
+        }
+
+        public RelayCommand RequeryEmployees { get; set; }
+        public RelayCommand SaveShiftCommand { get; set; }
+
+        public ObservableCollection<Employee> Employees
+        {
+            get
+            {
+                using (var db = new UnitOfWork(new InterManageDbContext()))
+                {
+                    return new ObservableCollection<Employee>(db.Employees.GetAll().ToList());
+                }
+            }
+        }
+
+        public ObservableCollection<Shift> ShiftsOnSelectedDate
+        {
+            get
+            {
+                using (var db = new UnitOfWork(new InterManageDbContext()))
+                {
+                    return new ObservableCollection<Shift>(db.Shifts.GetShiftsOnDate(SelectedDate));
+                }
+            }
+        }
+
+
+        public Shift FocusedShift
+        {
+            get { return _focusedShift; }
+            set
+            {
+                _focusedShift = value;
+                RaisePropertyChanged(nameof(FocusedShift));
+            }
+        }
+
+        public DateAndTime FocusedShiftStart
+        {
+            set
+            {
+                FocusedShift.Start = value.Date.Add(value.Time);
+            }
+        }
+
+        public DateAndTime FocusedShiftEnd
+        {
+            set
+            {
+                FocusedShift.End = value.Date.Add(value.Time);
+            }
+        }
+
+        public DateTime SelectedDate
+        {
+            get { return selectedDate; }
+            set
+            {
+                selectedDate = value;
+                // TODO: Bad bad bad, listen for on changed.
+                RaisePropertyChanged(nameof(SelectedDate));
+                RaisePropertyChanged(nameof(ShiftsOnSelectedDate));
+            }
+        }
+
+        private Shift DefaultShift() => new Shift
+        {
+            Start = DateTime.Now,
+            End = DateTime.Now
+        };
+
+        public void SaveShift()
+        {
+            using (var db = new UnitOfWork(new InterManageDbContext()))
+            {
+                if (FocusedShift.Error == null)
+                {
+                    var shift = db.Shifts.Get(FocusedShift.Id);
+                    if (shift == null)
+                    {
+                        db.Employees.Get(FocusedShift.AssignedEmployee.Id).Shifts.Add(FocusedShift);
+                    }
+                    else
+                    {
+                        shift.AssignedEmployee = FocusedShift.AssignedEmployee;
+                        shift.Start = FocusedShift.Start;
+                        shift.End = FocusedShift.End;
+                    }
+                    db.Commit();
+                }
+            }
+            FocusedShift = DefaultShift();
+        }
+
+        public class DateAndTime
+        {
+            public DateTime Date { get; set; }
+            public TimeSpan Time { get; set; }
+        }
+
         /*private Shift _focusedShift;
         private DateTime _selectedDate;
 
@@ -74,27 +187,7 @@ namespace InterManage.ViewModel.EmployeeViewModels
         }
 
         public RelayCommand RemoveShiftCommand { get; set; }
-        public RelayCommand SaveShiftCommand { get; set; }*/
-
-        public EmployeeSchedulesViewModel()
-        {
-            
-        }
-
-        private Shift _focusedShift;
-        public Shift FocusedShift
-        {
-            get { return _focusedShift; }
-            set
-            {
-                _focusedShift = value;
-                RaisePropertyChanged(nameof(FocusedShift));
-            }
-        }
-
-
-
-
-
+        public RelayCommand SaveShiftCommand { get; set; }
+        */
     }
 }

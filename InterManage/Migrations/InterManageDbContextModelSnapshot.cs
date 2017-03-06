@@ -40,17 +40,9 @@ namespace InterManage.Migrations
 
                     b.Property<DateTime>("End");
 
-                    b.Property<DateTime>("EndDay");
-
-                    b.Property<TimeSpan>("EndTime");
-
                     b.Property<string>("Error");
 
                     b.Property<DateTime>("Start");
-
-                    b.Property<DateTime>("StartDay");
-
-                    b.Property<TimeSpan>("StartTime");
 
                     b.HasKey("Id");
 

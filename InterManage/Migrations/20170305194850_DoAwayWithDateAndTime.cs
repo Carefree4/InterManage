@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InterManage.Migrations
 {
-    public partial class First : Migration
+    public partial class DoAwayWithDateAndTime : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,12 +29,8 @@ namespace InterManage.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     AssignedEmployeeId = table.Column<Guid>(nullable: true),
                     End = table.Column<DateTime>(nullable: false),
-                    EndDay = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<TimeSpan>(nullable: false),
                     Error = table.Column<string>(nullable: true),
-                    Start = table.Column<DateTime>(nullable: false),
-                    StartDay = table.Column<DateTime>(nullable: false),
-                    StartTime = table.Column<TimeSpan>(nullable: false)
+                    Start = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
