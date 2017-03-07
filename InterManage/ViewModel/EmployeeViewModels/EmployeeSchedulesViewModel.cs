@@ -50,8 +50,7 @@ namespace InterManage.ViewModel.EmployeeViewModels
                 }
             }
         }
-
-
+        
         public Shift FocusedShift
         {
             get { return _focusedShift; }
@@ -59,22 +58,6 @@ namespace InterManage.ViewModel.EmployeeViewModels
             {
                 _focusedShift = value;
                 RaisePropertyChanged(nameof(FocusedShift));
-            }
-        }
-
-        public DateAndTime FocusedShiftStart
-        {
-            set
-            {
-                FocusedShift.Start = value.Date.Add(value.Time);
-            }
-        }
-
-        public DateAndTime FocusedShiftEnd
-        {
-            set
-            {
-                FocusedShift.End = value.Date.Add(value.Time);
             }
         }
 
@@ -117,12 +100,6 @@ namespace InterManage.ViewModel.EmployeeViewModels
                 }
             }
             FocusedShift = DefaultShift();
-        }
-
-        public class DateAndTime
-        {
-            public DateTime Date { get; set; }
-            public TimeSpan Time { get; set; }
         }
 
         /*private Shift _focusedShift;

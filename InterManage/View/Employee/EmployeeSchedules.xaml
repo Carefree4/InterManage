@@ -97,10 +97,10 @@
                 </ComboBox>
 
                 <Label Content="Start Time" Grid.Row="1" Grid.Column="0" />
-                <controls:DateTimePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding FocusedShiftStart.Date, Mode=TwoWay}" SelectedTime="{Binding FocusedShiftStart.Time, Mode=TwoWay}" />
+                <controls:DateTimePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding FocusedShift.Start, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.Start, Mode=TwoWay}" />
 
                 <Label Content="End Time" Grid.Row="2" Grid.Column="0" />
-                <controls:DateTimePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding FocusedShiftEnd.Date, Mode=TwoWay}" SelectedTime="{Binding FocusedShiftEnd.Time, Mode=TwoWay}" />
+                <controls:DateTimePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding FocusedShift.End, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.End, Mode=TwoWay}" />
                 <Button Grid.Column="0" Grid.Row="3" Foreground="White" Background="DarkRed" Content="Delete" Command="{Binding RemoveShiftCommand}" Margin="4,0"/>
                 <Button Grid.Column="1" Grid.Row="3" Foreground="White" Background="Green" Content="Save" Command="{Binding SaveShiftCommand}" Margin="4,0"/>
             </Grid>
