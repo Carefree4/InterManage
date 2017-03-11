@@ -15,6 +15,7 @@ namespace InterManage.Repository.Persistence
 
         public Shift Get(Guid id) => Context.Set<Shift>().Find(id);
 
+        // TODO: Support shifts longer then 2 days
         public IEnumerable<Shift> GetShiftsOnDate(DateTime day)
             => Context.Set<Shift>().Where(s => s.Start.Date.Equals(day.Date) || s.End.Date.Equals(day.Date));
     }

@@ -15,57 +15,6 @@
         <employeeViewModels:EmployeeSchedulesViewModel />
     </UserControl.DataContext>
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Label Content="Assigned Employee" Grid.Column="0" Grid.Row="0"/>
-            <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding FocusedShift.AssignedEmployee, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" />
-
-            <Label Content="Start Time" Grid.Row="1" Grid.Column="0" />
-            <controls:DateTimePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding FocusedShift.StartDay, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.StartTime, Mode=TwoWay}" />
-            
-            <Label Content="End Time" Grid.Row="2" Grid.Column="0" />
-            <controls:DateTimePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding FocusedShift.EndDay, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.EndTime, Mode=TwoWay}" />
-            <Button Grid.Column="0" Grid.Row="9" Foreground="White" Background="DarkRed" Content="Delete" Command="{Binding RemoveShiftCommand}" Margin="4,0"/>
-            <Button Grid.Column="1" Grid.Row="9" Foreground="White" Background="Green" Content="Save" Command="{Binding SaveShiftCommand}" Margin="4,0"/>
-
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Viewbox Grid.Row="0">
-                <Calendar SelectedDate="{Binding SelectedDate, Mode=TwoWay}" SelectionMode="SingleDate" />
-            </Viewbox>
-            <DataGrid ItemsSource="{Binding ShiftsOnSelectedDate}" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Employee" Binding="{Binding AssignedEmployee.FullName}"/>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Start}"/>
-                    <DataGridTextColumn Header="End" Binding="{Binding End}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>-->
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="*" />

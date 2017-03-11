@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:employee="clr-namespace:InterManage.View.Employee"
+        xmlns:customer="clr-namespace:InterManage.View.Customer"
         mc:Ignorable="d"
         Title="InterManage" Height="600" Width="800">
     <TabControl>
         <TabItem Header="Employees">
             <employee:EmployeeTabControl />
+        </TabItem>
+        <TabItem Header="Customers">
+            <customer:CustomerTabControl />
         </TabItem>
     </TabControl>
 </controls:MetroWindow>

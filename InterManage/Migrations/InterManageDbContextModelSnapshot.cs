@@ -15,6 +15,44 @@ namespace InterManage.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
+            modelBuilder.Entity("InterManage.Model.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("InterManage.Model.CustomerPresence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("CustomerId");
+
+                    b.Property<Guid?>("EmployeeId");
+
+                    b.Property<DateTime>("TimeOfCheckIn");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("CustomerPresences");
+                });
+
             modelBuilder.Entity("InterManage.Model.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -49,6 +87,17 @@ namespace InterManage.Migrations
                     b.HasIndex("AssignedEmployeeId");
 
                     b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("InterManage.Model.CustomerPresence", b =>
+                {
+                    b.HasOne("InterManage.Model.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("InterManage.Model.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
                 });
 
             modelBuilder.Entity("InterManage.Model.Shift", b =>

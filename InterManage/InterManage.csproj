@@ -209,28 +209,41 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Migrations\20170305194850_DoAwayWithDateAndTime.cs" />
-    <Compile Include="Migrations\20170305194850_DoAwayWithDateAndTime.designer.cs">
-      <DependentUpon>20170305194850_DoAwayWithDateAndTime.cs</DependentUpon>
+    <Compile Include="Migrations\20170311062210_First.cs" />
+    <Compile Include="Migrations\20170311062210_First.designer.cs">
+      <DependentUpon>20170311062210_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\InterManageDbContextModelSnapshot.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\CustomerPresence.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Shift.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Repository\Core\ICustomerPresenceRepository.cs" />
+    <Compile Include="Repository\Core\ICustomerRepository.cs" />
     <Compile Include="Repository\Core\IEmployeeRepository.cs" />
     <Compile Include="Repository\Core\IRepository.cs" />
     <Compile Include="Repository\Core\IShiftRepository.cs" />
     <Compile Include="Repository\Core\IUnitOfWork.cs" />
+    <Compile Include="Repository\Persistence\CustomerPresenceRepository.cs" />
+    <Compile Include="Repository\Persistence\CustomerRepository.cs" />
     <Compile Include="Repository\Persistence\EmployeeRepository.cs" />
     <Compile Include="Repository\Persistence\InterManageDbContext.cs" />
     <Compile Include="Repository\Persistence\Repository.cs" />
     <Compile Include="Repository\Persistence\ShiftRepository.cs" />
     <Compile Include="Repository\Persistence\UnitOfWork.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\CustomerCheckInViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModels\EmployeeSchedulesViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModels\ManageEmployeesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Customer\CheckInCustomer.xaml.cs">
+      <DependentUpon>CheckInCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Customer\CustomerTabControl.xaml.cs">
+      <DependentUpon>CustomerTabControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Employee\EmployeeDataGrid.xaml.cs">
       <DependentUpon>EmployeeDataGrid.xaml</DependentUpon>
     </Compile>
@@ -273,6 +286,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\Customer\CheckInCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Customer\CustomerTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Employee\EmployeeDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

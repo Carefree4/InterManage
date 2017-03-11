@@ -6,6 +6,8 @@ namespace InterManage.Repository.Core
     {
         IEmployeeRepository Employees { get; }
         IShiftRepository Shifts { get; }
+        ICustomerPresenceRepository CustomerPresences { get; }
+        ICustomerRepository Customers { get; }
         int Commit();
     }
 }
