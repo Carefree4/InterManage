@@ -22,7 +22,7 @@
         <Grid Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Row="0">
                 <Grid.ColumnDefinitions>
@@ -36,8 +36,10 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Assigned Employee" Grid.Column="0" Grid.Row="0"/>
-                <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding FocusedShift.AssignedEmployee, Mode=TwoWay}" Grid.Column="1" Grid.Row="0">
+                <Label Content="Assigned Employee" Grid.Column="0" Grid.Row="0" />
+                <ComboBox ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding FocusedShift.AssignedEmployee, Mode=TwoWay}" Grid.Column="1"
+                          Grid.Row="0">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="DropDownOpened">
                             <i:InvokeCommandAction Command="{Binding RequeryEmployees}" />
@@ -46,29 +48,36 @@
                 </ComboBox>
 
                 <Label Content="Start Time" Grid.Row="1" Grid.Column="0" />
-                <controls:DateTimePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding FocusedShift.Start, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.Start, Mode=TwoWay}" />
+                <controls:DateTimePicker Grid.Row="1" Grid.Column="1"
+                                         SelectedDate="{Binding FocusedShift.Start, Mode=TwoWay}"
+                                         SelectedTime="{Binding FocusedShift.Start, Mode=TwoWay}" />
 
                 <Label Content="End Time" Grid.Row="2" Grid.Column="0" />
-                <controls:DateTimePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding FocusedShift.End, Mode=TwoWay}" SelectedTime="{Binding FocusedShift.End, Mode=TwoWay}" />
-                <Button Grid.Column="0" Grid.Row="3" Foreground="White" Background="DarkRed" Content="Delete" Command="{Binding RemoveShiftCommand}" Margin="4,0"/>
-                <Button Grid.Column="1" Grid.Row="3" Foreground="White" Background="Green" Content="Save" Command="{Binding SaveShiftCommand}" Margin="4,0"/>
+                <controls:DateTimePicker Grid.Row="2" Grid.Column="1"
+                                         SelectedDate="{Binding FocusedShift.End, Mode=TwoWay}"
+                                         SelectedTime="{Binding FocusedShift.End, Mode=TwoWay}" />
+                <Button Grid.Column="0" Grid.Row="3" Foreground="White" Background="DarkRed" Content="Delete"
+                        Command="{Binding RemoveShiftCommand}" Margin="4,0" />
+                <Button Grid.Column="1" Grid.Row="3" Foreground="White" Background="Green" Content="Save"
+                        Command="{Binding SaveShiftCommand}" Margin="4,0" />
             </Grid>
-            <DataGrid ItemsSource="{Binding ShiftsOnSelectedDate}" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid ItemsSource="{Binding ShiftsOnSelectedDate}" Grid.Row="1" IsReadOnly="True"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Employee" Binding="{Binding AssignedEmployee.FullName}"/>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Start}"/>
-                    <DataGridTextColumn Header="End" Binding="{Binding End}"/>
+                    <DataGridTextColumn Header="Employee" Binding="{Binding AssignedEmployee.FullName}" />
+                    <DataGridTextColumn Header="Start" Binding="{Binding Start}" />
+                    <DataGridTextColumn Header="End" Binding="{Binding End}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
 
         <Viewbox Grid.Column="1">
             <Calendar
-            SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
-            SelectionMode="SingleDate" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch" />
+                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                SelectionMode="SingleDate"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" />
         </Viewbox>
-        
+
     </Grid>
 </UserControl>
