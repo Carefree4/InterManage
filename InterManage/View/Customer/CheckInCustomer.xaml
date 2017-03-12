@@ -25,11 +25,11 @@
             <Label Content="Employee" Grid.Column="0" Grid.Row="0"/>
             <Label Content="Customer Phone Number" Grid.Column="0" Grid.Row="1"/>
             
-            <ComboBox Grid.Column="1" Grid.Row="0"/>
+            <ComboBox Grid.Column="1" Grid.Row="0" />
             <TextBox Grid.Column="1" Grid.Row="1" />
             <Button Foreground="White" Background="Green" Content="Check In" Grid.Column="1" Grid.Row="2"/>
             
         </Grid>
-        
+        <DataGrid Grid.Row="1" />
     </Grid>
 </UserControl>
